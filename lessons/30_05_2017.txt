@@ -1,0 +1,51 @@
+Пример 1
+var Cat = function(name) {
+  this.name = name;
+  this.say = function() {
+    console.log("Привет, я кот и меня зовут " + this.name);
+  }
+}
+
+var cat = new Cat('Мурзик');
+cat.say();
+
+
+
+Cat.prototype.isHungry = function () {
+  console.log('Да, я голодный. Корми меня!');
+}
+
+---------------------------------------------------------------
+
+Пример 2
+var a = 5;
+function f(arg) { /*...*/ }
+var g = function(arg) { /*...*/ };
+
+---------------------------------------------------------------
+
+Пример 3
+var foo = 1; 
+function bar() { 
+    var foo = 10; 
+    console.log(foo); 
+} 
+bar();
+console.log(foo)
+
+---------------------------------------------------------------
+
+Пример 4
+
+function getPrice(name, price) {
+  console.log( "Стоимость товара: " + name + " " + getFullPrice() );
+
+  function getFullPrice() {
+      return price + " грн.";
+    }
+
+}
+
+getPrice("Чайник", "10");
+
+---------------------------------------------------------------

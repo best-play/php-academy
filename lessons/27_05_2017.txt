@@ -1,0 +1,121 @@
+1) Создание
+
+Оператор new:
+var my_obj = new Object();
+my_obj.id = 5;
+my_obj.name = "Вася";
+
+
+Литеральная нотация:
+var my_obj = {
+    id: 5,
+    name: "Вася"
+}
+
+
+Конструктор:
+function my_new_obj(id, name) {
+    ...
+} 
+
+===================================
+
+
+
+
+
+2) Доступ
+console.log(my_obj.id);
+console.log(my_obj['id']);
+
+===================================
+
+
+
+
+
+
+
+3) Методы и свойства
+var my_obj = {
+    id: 5,
+    name: "Вася"            // свойство
+    sayName: function() {   // метод
+        console.log('Вася');
+    }
+}
+
+
+
+this ==>
+var my_obj = {
+    id: 5,
+    name: "Вася"            // свойство
+    getName: function() {   // метод
+        console.log(this.name);
+    }
+}
+
+
+
+this будет определен в момент вызова функции =>
+var user =  { name: "Вася" };
+var admin = { name: "Админ" };
+
+function getName() {
+  console.log( this.name );
+}
+
+user.name = getName;
+admin.name = getName;
+
+user.name();    // Вася
+admin.name();   // Админ
+
+
+
+
+
+4) ООП
+var animal = {
+  hasFur: true
+};
+var dog = {
+  hasTail: true
+};
+
+dog.__proto__ = animal;
+
+console.log( dog.hasFur ); // true
+console.log( dog.hasTail ); // true
+
+======================================
+
+Конструктор
+var animal = {
+  eats: true
+};
+
+function Dog(name) {
+  this.name = name;
+  this.__proto__ = animal;
+}
+
+var dog = new Dog("Такса");
+console.log( dog.eats );
+
+
+======================================
+Перепишем через new 
+var animal = {
+  eats: true
+};
+
+function Dog(name) {
+  this.name = name;
+}
+
+Dog.prototype = animal;
+
+var dog = new Dog("Такса");
+console.log( dog.eats );
