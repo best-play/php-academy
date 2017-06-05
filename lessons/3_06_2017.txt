@@ -1,0 +1,153 @@
+Пример 1
+var Cat = function(name) {
+  this.name = name;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------------------------------
+
+Пример 2
+var data = {
+    type: "cat",
+    name: "Мурзик"
+}
+
+function Animal(data) {
+  if (data.type === 'cat') {
+    this.name = data.name;
+    this.type = data.type;
+  } else if (data.type === 'dog') {
+    this.name = 'Шарик';
+    this.type = data.type;
+  }
+
+  this.say = function() {
+    console.log("Привет, я "+ this.type +" и меня зовут " + this.name);
+  }
+}
+
+------------------------------- 
+
+Пример 3
+function showInfo() {
+  console.log( this.country + ", " + this.city );
+}
+
+var info = {
+  country: "Украина",
+  city: "Днепр",
+  currency: "грн"
+};
+
+showFullInfo.call(info);
+
+------------------------------- 
+
+Пример 4
+function printArgs() {
+  arguments.join = [].join;
+  var argStr = arguments.join(', ');
+  console.log( argStr );
+}
+printArgs(1, 2, 3);
+
+
+
+
+
+function printArgs() {
+  var join = [].join;
+  var argStr = join.call(arguments, ', ');
+  console.log( argStr );
+}
+printArgs(1, 2, 3);
+
+-------------------------------
+
+Пример 5
+console.log( Math.max(1, 5, 2) );
+
+
+
+var arr = [];
+arr.push(1);
+arr.push(5);
+arr.push(2);
+
+console.log( Math.max.apply(null, arr) );
+
+-------------------------------
+
+Пример 6
+var hello_world = {
+  text: "Hello world!",
+  print: function() {
+    console.log( this.text );
+  }
+};
+
+setTimeout(hello_world.print, 1000);
+
+
+**************************************************
+function bind(func, context) {
+  return function() { // (*)
+    return func.apply(context, arguments);
+  };
+}
+**************************************************
+
+function foo() {
+  console.log( this );
+}
+
+var bar = bind(foo, 'context');
+bar();
+
+---------------------------------
+
+Пример 7
+function isAdmin() {
+    ...
+} // вернет true или false
+
+function save() {
+} // сохраняет с правами админа
+
+function checkPermissionDecorator(func) {
+  return function() {
+    if (isAdmin()) {
+      return func.apply(this, arguments);
+    }
+    console.log( 'Вы не админ' );
+  }
+}
+
+save = checkPermissionDecorator(save);
