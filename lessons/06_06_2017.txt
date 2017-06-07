@@ -1,1 +1,59 @@
+'use strict';
+function Machine() {
+    this._enable = false;
+    this.enableEngine = function () {
+        this._enable = true;
+    }
+    this.disableEngine = function () {
+        this._enable = false;
+    }
+}
 
+function Car(power) {
+    var CONSUMPTION = 10;
+    var FUEL_TANK = 40;
+    var self = this;
+    var fuelAmount = 0;
+    var oldEnableEngine;
+
+    Machine.apply(self, arguments);
+    this.setFuelAmount = function (amount) {
+        var totalAmount = 0;
+        if (amount <= 0) {
+            throw new Error('Введите положительное число!');
+        }
+        if (amount > FUEL_TANK) {
+            throw new Error('Нельзя залить более 40 л.')
+        }
+
+        totalAmount = fuelAmount + amount;
+        if (totalAmount >= FUEL_TANK) {
+            throw new Error('Мы не можем заправить '+ amount +' л. топлива.')
+        }
+        fuelAmount += amount;
+    };
+    this.getFuelAmount = function () {
+        return fuelAmount;
+    }
+
+    function getTimeOfRide() {
+        return (fuelAmount / CONSUMPTION) * 1000;
+    }
+    function makeRide() {
+        console.log('Мы приехали через ' + getTimeOfRide() / 1000 + ' с.');
+    }
+
+    this.ride = function () {
+        setTimeout(makeRide, getTimeOfRide());
+    }
+
+    oldEnableEngine = this.enableEngine;
+    this.enableEngine = function () {
+        console.log('Двигатель завели');
+    }
+    console.log('Авто готово: мощность ' + power + ' л.с., в баке: ' + fuelAmount + ' л.');
+}
+
+var car = new Car(100);
+car.setFuelAmount(20);
+car.ride();
