@@ -1,0 +1,24 @@
+<!doctype html>
+<html ng-app="app">
+<head>
+  <meta charset="utf-8">
+</head>
+<body>
+
+<div ng-controller="MainCtrl as main">
+  <input type="text" placeholder="" ng-model="main.dogName">
+  <button ng-click="main.addDog(main.dogName)">Добавить</button>
+  <h1>Собаки - {{ main.animals.length }} шт.:</h1>
+  <ul>
+    <li ng-repeat="animal in main.animals">
+      <span>{{ animal.name }}</span>
+      <button ng-click="main.changeName(animal)">Изменить</button>
+      <button ng-click="main.deleteDog($index)">Удалить</button>
+    </li>
+  </ul>
+</div>
+
+<script src="angular.min.js"></script>
+<script src="angular_learn.js"></script>
+</body>
+</html>
