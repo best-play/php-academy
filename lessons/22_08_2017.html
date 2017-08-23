@@ -1,0 +1,26 @@
+<!doctype html>
+<html data-ng-app="app">
+<head>
+  <meta charset="utf-8">
+</head>
+<body>
+
+<div data-ng-controller="MainCtrl as main">
+  <div ng-repeat="item in main.goods">
+    <div>{{ item.name}} ({{ item.brand }})</div>
+    <div><img data-ng-src="{{ item.img }}" alt="{{ item.name}} ({{ item.brand }})"></div>
+    <div>Sex: {{ item.sex }}</div>
+    <div>Size: {{ item.size }}</div>
+    <div>Price: {{ item.price|currency }}</div>
+    <div>Qty: {{ item.qty }}</div>
+    <button data-ng-hide="item.qty === 0" data-ng-click="main.addToCart(item)">Купить</button>
+  </div>
+  
+  В корзине: {{ main.cartCount() }} товаров ->
+  <add-item ng-click="addItem" item-price="item.price|currency"></add-item>
+</div>
+
+<script src="angular.min.js"></script>
+<script src="angular_learn.js"></script>
+</body>
+</html>
