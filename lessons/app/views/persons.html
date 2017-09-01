@@ -1,0 +1,9 @@
+<div>
+  <div data-ng-repeat="person in persons.persons">
+    <div>Name - {{ person.name }} ({{ person.age }} age)</div>
+    <div>Position - {{ person.position }}</div>
+  
+    <div><a data-ng-href="#!/person/{{ person.id }}">Full Info</a></div>
+    <hr>
+  </div>
+</div>
